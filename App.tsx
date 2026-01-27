@@ -8,6 +8,12 @@ import EnrichmentHome from './pages/EnrichmentHome';
 import { RoadmapLanding, RoadmapDetail } from './pages/Roadmap';
 import Pricing from './pages/Pricing';
 import { ParentDashboard, TutorDashboard } from './pages/Dashboards';
+import NewParentDashboard from './pages/NewParentDashboard';
+import NewTutorDashboard from './pages/NewTutorDashboard';
+import { ParentSignup } from './pages/ParentSignup';
+import { ParentLogin } from './pages/ParentLogin';
+import { TutorSignup } from './pages/TutorSignup';
+import { TutorLogin } from './pages/TutorLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { AdminMatching } from './pages/AdminMatching';
 import { AdminInvoices } from './pages/AdminInvoices';
@@ -15,6 +21,7 @@ import { AdminVerification } from './pages/AdminVerification';
 import SchoolTeacherDashboard from './pages/SchoolTeacherDashboard'; 
 import { About, Contact, ExtraLearnings, HolidayPrograms, CourseworkSupport, Policies, TutorLanding, TutorRequest, SpecializedRequest } from './pages/ContentPages';
 import { Calendar } from './pages/Calendar';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 // Protected Route for Coursework (Sec 4 only)
 const Sec4OnlyRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -38,13 +45,22 @@ const App: React.FC = () => {
           {/* Main Landing Page */}
           <Route path="/" element={<MainLanding />} />
           
+          {/* Authentication Routes */}
+          <Route path="/signup/parent" element={<ParentSignup />} />
+          <Route path="/login/parent" element={<ParentLogin />} />
+          <Route path="/signup/tutor" element={<TutorSignup />} />
+          <Route path="/login/tutor" element={<TutorLogin />} />
+          
           {/* Tuition Service Routes */}
           <Route path="/tuition" element={<TuitionHome />} />
           <Route path="/tuition/roadmap" element={<RoadmapLanding />} />
           <Route path="/tuition/roadmap/:topicId" element={<RoadmapDetail />} />
           <Route path="/tuition/pricing" element={<Pricing />} />
-          <Route path="/tuition/parents" element={<ParentDashboard />} />
-          <Route path="/tuition/tutors" element={<TutorDashboard />} />
+          <Route path="/tuition/parents" element={<ProtectedRoute requiredRole="parent" redirectTo="/login/parent"><NewParentDashboard /></ProtectedRoute>} />
+          <Route path="/tuition/tutors" element={<ProtectedRoute requiredRole="tutor" redirectTo="/login/tutor"><NewTutorDashboard /></ProtectedRoute>} />
+          {/* Keep old dashboard routes for backward compatibility */}
+          <Route path="/parents" element={<ProtectedRoute requiredRole="parent" redirectTo="/login/parent"><NewParentDashboard /></ProtectedRoute>} />
+          <Route path="/tutors" element={<ProtectedRoute requiredRole="tutor" redirectTo="/login/tutor"><NewTutorDashboard /></ProtectedRoute>} />
           <Route path="/tuition/teach" element={<TutorLanding />} />
           <Route path="/tuition/about" element={<About />} />
           <Route path="/tuition/contact" element={<Contact />} />
@@ -71,8 +87,6 @@ const App: React.FC = () => {
           <Route path="/roadmap" element={<Navigate to="/tuition/roadmap" replace />} />
           <Route path="/roadmap/:topicId" element={<Navigate to="/tuition/roadmap/:topicId" replace />} />
           <Route path="/pricing" element={<Navigate to="/tuition/pricing" replace />} />
-          <Route path="/parents" element={<Navigate to="/tuition/parents" replace />} />
-          <Route path="/tutors" element={<Navigate to="/tuition/tutors" replace />} />
           <Route path="/teach" element={<Navigate to="/tuition/teach" replace />} />
           <Route path="/about" element={<Navigate to="/tuition/about" replace />} />
           <Route path="/contact" element={<Navigate to="/tuition/contact" replace />} />
