@@ -247,6 +247,29 @@ export const getTutorProfile = async (
   }
 };
 
+export const getTutorCertificates = async (
+  tutorId: string
+): Promise<{ success: boolean; data?: any[]; error?: string }> => {
+  if (!supabase) {
+    return { success: false, error: 'Supabase not configured' };
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('tutor_certificates')
+      .select('*')
+      .eq('tutor_id', tutorId)
+      .order('uploaded_at', { ascending: false });
+
+    if (error) throw error;
+
+    return { success: true, data: data || [] };
+  } catch (error: any) {
+    console.error('Get tutor certificates error:', error);
+    return { success: false, error: error.message };
+  }
+};
+
 // ============================================================================
 // ADMIN API FUNCTIONS
 // ============================================================================
