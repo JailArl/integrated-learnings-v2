@@ -23,6 +23,12 @@ import {
   Send,
 } from 'lucide-react';
 
+const FILE_UPLOAD_CONFIG = {
+  MAX_SIZE: 5 * 1024 * 1024, // 5MB in bytes
+  ALLOWED_TYPES: ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'],
+  ALLOWED_EXTENSIONS: '.pdf,.jpg,.jpeg,.png',
+};
+
 interface Case {
   id: string;
   student_name: string;
@@ -343,16 +349,14 @@ const CertificateUpload: React.FC<{
     }
 
     // Validate file type
-    const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
-    if (!validTypes.includes(file.type)) {
+    if (!FILE_UPLOAD_CONFIG.ALLOWED_TYPES.includes(file.type)) {
       setError('Please upload a PDF, JPG, or PNG file');
       setSelectedFile(null);
       return;
     }
 
-    // Validate file size (5MB max)
-    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-    if (file.size > maxSize) {
+    // Validate file size
+    if (file.size > FILE_UPLOAD_CONFIG.MAX_SIZE) {
       setError('File size must be less than 5MB');
       setSelectedFile(null);
       return;
@@ -400,7 +404,7 @@ const CertificateUpload: React.FC<{
         <input
           id="certificate-upload"
           type="file"
-          accept=".pdf,.jpg,.jpeg,.png"
+          accept={FILE_UPLOAD_CONFIG.ALLOWED_EXTENSIONS}
           onChange={handleFileChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
         />
@@ -505,40 +509,47 @@ const NewTutorDashboardContent: React.FC = () => {
     setLoading(true);
     setError('');
 
-    const { user } = await getCurrentUser();
-    if (!user) {
-      setError('User not authenticated');
+    try {
+      const { user } = await getCurrentUser();
+      if (!user) {
+        setError('You are not authenticated. Please log in to continue.');
+        setLoading(false);
+        return;
+      }
+
+      setTutorId(user.id);
+
+      // Load tutor profile
+      const profileResult = await getTutorProfile(user.id);
+      if (profileResult.success && profileResult.data) {
+        setProfile(profileResult.data);
+      } else {
+        setError(profileResult.error || 'Failed to load tutor profile');
+      }
+
+      // Load available cases
+      const casesResult = await getAvailableCases();
+      if (casesResult.success && casesResult.data) {
+        setAvailableCases(casesResult.data);
+      }
+
+      // Load my bids
+      const bidsResult = await getMyBids(user.id);
+      if (bidsResult.success && bidsResult.data) {
+        setMyBids(bidsResult.data);
+      }
+
+      // Load certificates
+      const certsResult = await getTutorCertificates(user.id);
+      if (certsResult.success && certsResult.data) {
+        setCertificates(certsResult.data);
+      }
+    } catch (err: any) {
+      setError('An unexpected error occurred. Please try again later.');
+      console.error('Error loading tutor dashboard:', err);
+    } finally {
       setLoading(false);
-      return;
     }
-
-    setTutorId(user.id);
-
-    // Load tutor profile
-    const profileResult = await getTutorProfile(user.id);
-    if (profileResult.success && profileResult.data) {
-      setProfile(profileResult.data);
-    }
-
-    // Load available cases
-    const casesResult = await getAvailableCases();
-    if (casesResult.success && casesResult.data) {
-      setAvailableCases(casesResult.data);
-    }
-
-    // Load my bids
-    const bidsResult = await getMyBids(user.id);
-    if (bidsResult.success && bidsResult.data) {
-      setMyBids(bidsResult.data);
-    }
-
-    // Load certificates
-    const certsResult = await getTutorCertificates(user.id);
-    if (certsResult.success && certsResult.data) {
-      setCertificates(certsResult.data);
-    }
-
-    setLoading(false);
   };
 
   useEffect(() => {
