@@ -61,6 +61,7 @@ export const AdminInvoices: React.FC = () => {
 
     const invoiceData = {
       matchId: match.id,
+      requestId: match.request_id,
       parentName: parentName,
       studentName: match.request?.student_name || 'Unknown Student',
       tutorName: match.tutor?.full_name || 'Unknown Tutor',

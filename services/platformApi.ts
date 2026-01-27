@@ -479,6 +479,7 @@ export const getMatchesForInvoicing = async (): Promise<{
 
 export const generateInvoice = async (matchData: {
   matchId: string;
+  requestId: string;
   parentName: string;
   studentName: string;
   tutorName: string;
@@ -575,7 +576,7 @@ export const generateInvoice = async (matchData: {
     const { error: statusError } = await supabase
       .from('parent_requests')
       .update({ status: 'invoiced' })
-      .eq('id', matchData.matchId);
+      .eq('id', matchData.requestId);
 
     if (statusError) throw statusError;
 
