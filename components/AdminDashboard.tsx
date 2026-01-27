@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { AlertCircle, CheckCircle, Clock, Eye, EyeOff, LogOut, RefreshCw, Download, Search, Filter } from 'lucide-react';
 import { supabase, isSupabaseConfigured } from '../services/supabase';
 
@@ -326,6 +327,42 @@ export default function AdminDashboard() {
                   <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
                   <span className="text-sm text-yellow-700">Configured (Resend API)</span>
                 </div>
+              </div>
+            </div>
+
+            <div className="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <h3 className="font-bold text-green-900 mb-3">Admin Tools</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <Link
+                  to="/admin/matching"
+                  className="flex items-center justify-between p-4 bg-white border border-green-300 rounded-lg hover:bg-green-100 transition"
+                >
+                  <div>
+                    <p className="font-semibold text-green-900">Bid Matching</p>
+                    <p className="text-xs text-green-700">Review & approve tutor bids</p>
+                  </div>
+                  <span className="text-green-600">→</span>
+                </Link>
+                <Link
+                  to="/admin/invoices"
+                  className="flex items-center justify-between p-4 bg-white border border-green-300 rounded-lg hover:bg-green-100 transition"
+                >
+                  <div>
+                    <p className="font-semibold text-green-900">Invoice Generation</p>
+                    <p className="text-xs text-green-700">Generate invoices for matches</p>
+                  </div>
+                  <span className="text-green-600">→</span>
+                </Link>
+                <Link
+                  to="/admin/verification"
+                  className="flex items-center justify-between p-4 bg-white border border-green-300 rounded-lg hover:bg-green-100 transition"
+                >
+                  <div>
+                    <p className="font-semibold text-green-900">Tutor Verification</p>
+                    <p className="text-xs text-green-700">Verify tutor applications</p>
+                  </div>
+                  <span className="text-green-600">→</span>
+                </Link>
               </div>
             </div>
 

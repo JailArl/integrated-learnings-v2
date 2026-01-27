@@ -4,6 +4,7 @@ import { PageHeader, Section, Button, Card } from '../components/Components';
 import { Phone, Mail, Clock, Shield, FileText, AlertCircle, Users, DollarSign, Microscope, Target, BarChart3, CheckCircle2, TrendingUp, Calendar } from 'lucide-react';
 import { POLICY_CONTENT, PRIVACY_POLICY_TEXT } from '../constants';
 import { useSearchParams } from 'react-router-dom';
+import { api } from '../services/api';
 
 export const About: React.FC = () => (
   <div>
@@ -1043,13 +1044,36 @@ export const TutorRequest: React.FC = () => {
     'Economics', 'History', 'Geography', 'Literature'
   ];
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!formData.postalCode || !formData.address) {
       alert('Please fill in your address and postal code.');
       return;
     }
-    alert('Request submitted successfully! We will contact you within 24 hours to confirm the best tutor match.');
-    window.location.href = '/#/parents';
+
+    try {
+      const result = await api.forms.submitParentRequest({
+        studentName: formData.studentName,
+        level: formData.level,
+        subjects: formData.subjects,
+        address: formData.address,
+        postalCode: formData.postalCode,
+        classType: formData.classType,
+        needsCoursework: formData.needsCoursework,
+        tutorGender: formData.tutorGender,
+        preferredExperience: formData.preferredExperience,
+        teachingStyle: formData.teachingStyle,
+        details: formData.details
+      });
+
+      if (result.success) {
+        alert('Request submitted successfully! We will contact you within 24 hours to confirm the best tutor match.');
+        window.location.href = '/#/parents';
+      } else {
+        alert(`Error: ${result.message}`);
+      }
+    } catch (error: any) {
+      alert(`Error submitting request: ${error.message}`);
+    }
   };
 
   return (
