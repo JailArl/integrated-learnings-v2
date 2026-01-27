@@ -9,6 +9,9 @@ import { RoadmapLanding, RoadmapDetail } from './pages/Roadmap';
 import Pricing from './pages/Pricing';
 import { ParentDashboard, TutorDashboard } from './pages/Dashboards';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { AdminMatching } from './pages/AdminMatching';
+import { AdminInvoices } from './pages/AdminInvoices';
+import { AdminVerification } from './pages/AdminVerification';
 import SchoolTeacherDashboard from './pages/SchoolTeacherDashboard'; 
 import { About, Contact, ExtraLearnings, HolidayPrograms, CourseworkSupport, Policies, TutorLanding, TutorRequest, SpecializedRequest } from './pages/ContentPages';
 import { Calendar } from './pages/Calendar';
@@ -81,10 +84,25 @@ const App: React.FC = () => {
           <Route path="/coursework" element={<Navigate to="/tuition/coursework" replace />} />
           <Route path="/policies" element={<Navigate to="/tuition/policies" replace />} />
           
-          {/* Admin Route - Hidden from UI, but accessible via URL */}
+          {/* Admin Routes - Hidden from UI, but accessible via URL */}
           <Route path="/admin" element={
             <AdminRoute>
               <AdminDashboard />
+            </AdminRoute>
+          } />
+          <Route path="/admin/matching" element={
+            <AdminRoute>
+              <AdminMatching />
+            </AdminRoute>
+          } />
+          <Route path="/admin/invoices" element={
+            <AdminRoute>
+              <AdminInvoices />
+            </AdminRoute>
+          } />
+          <Route path="/admin/verification" element={
+            <AdminRoute>
+              <AdminVerification />
             </AdminRoute>
           } />
 
