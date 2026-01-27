@@ -25,11 +25,11 @@ export const api = {
   admin: {
     checkConnection: async () => {
       // Returns true if running on real DB, false if Mock
-      if (CONFIG.USE_MOCK_DATA || !supabase) return false;
+      if (!supabase) return false;
       return true;
     },
     getAllStudents: async () => {
-      if (!CONFIG.USE_MOCK_DATA && supabase) {
+      if (supabase) {
         const { data } = await supabase.from('students').select('*');
         return data as StudentProfile[] || [];
       }
@@ -37,7 +37,7 @@ export const api = {
       return MOCK_STUDENTS;
     },
     getAllTutors: async () => {
-      if (!CONFIG.USE_MOCK_DATA && supabase) {
+      if (supabase) {
         const { data } = await supabase.from('tutors').select('*');
         return data as TutorProfile[] || [];
       }
@@ -45,7 +45,7 @@ export const api = {
       return MOCK_TUTORS;
     },
     getAllRequests: async () => {
-      if (!CONFIG.USE_MOCK_DATA && supabase) {
+      if (supabase) {
         const { data } = await supabase.from('requests').select('*');
         return data as TutorRequest[] || [];
       }
@@ -53,7 +53,7 @@ export const api = {
       return MOCK_REQUESTS;
     },
     verifyTutor: async (id: string) => {
-      if (!CONFIG.USE_MOCK_DATA && supabase) {
+      if (supabase) {
         await supabase.from('tutors').update({ status: 'verified' }).eq('id', id);
         return true;
       }
@@ -67,7 +67,7 @@ export const api = {
     runMatch: async (requestId: string) => {
       console.log(`[Backend] Running AI Match algorithm for Request ${requestId}...`);
       
-      if (!CONFIG.USE_MOCK_DATA && supabase) {
+      if (supabase) {
         // REAL AI CALL using Supabase Edge Functions
         try {
            const { data, error } = await supabase.functions.invoke('match-tutor', {

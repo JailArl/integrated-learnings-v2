@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signUpTutor } from '../services/auth';
-import { Section, Button } from '../components/Components';
+import { Section } from '../components/Components';
 
 const SUBJECTS = [
   'English', 'Mathematics', 'Science', 
@@ -291,9 +291,9 @@ export const TutorSignup: React.FC = () => {
                   />
                 </div>
 
-                <Button type="button" onClick={handleNext} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3">
+                <button type="button" onClick={handleNext} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-200">
                   Next
-                </Button>
+                </button>
               </div>
             )}
 
@@ -351,12 +351,12 @@ export const TutorSignup: React.FC = () => {
                 </div>
 
                 <div className="flex space-x-4">
-                  <Button type="button" onClick={handleBack} className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-3">
+                  <button type="button" onClick={handleBack} className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-3 px-6 rounded-lg font-semibold transition duration-200">
                     Back
-                  </Button>
-                  <Button type="button" onClick={handleNext} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3">
+                  </button>
+                  <button type="button" onClick={handleNext} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-200">
                     Next
-                  </Button>
+                  </button>
                 </div>
               </div>
             )}
@@ -443,16 +443,16 @@ export const TutorSignup: React.FC = () => {
                 </div>
 
                 <div className="flex space-x-4">
-                  <Button type="button" onClick={handleBack} className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-3">
+                  <button type="button" onClick={handleBack} className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-3 px-6 rounded-lg font-semibold transition duration-200">
                     Back
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     type="submit"
                     disabled={loading}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? 'Submitting...' : 'Complete Signup'}
-                  </Button>
+                  </button>
                 </div>
               </div>
             )}

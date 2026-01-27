@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signIn } from '../services/auth';
-import { Section, Button } from '../components/Components';
+import { Section } from '../components/Components';
 
 export const TutorLogin: React.FC = () => {
   const navigate = useNavigate();
@@ -87,13 +87,13 @@ export const TutorLogin: React.FC = () => {
               />
             </div>
 
-            <Button
+            <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Logging in...' : 'Login'}
-            </Button>
+            </button>
           </form>
 
           <div className="mt-6 text-center">
