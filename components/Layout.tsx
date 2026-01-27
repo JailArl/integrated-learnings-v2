@@ -22,7 +22,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   
   // Determine current section
   const isTuitionSection = location.pathname.startsWith('/tuition');
-  const isEnrichmentSection = location.pathname.startsWith('/enrichment');
+  const isSchoolSection = location.pathname.startsWith('/schools') || location.pathname.startsWith('/enrichment');
   const isMainLanding = location.pathname === '/';
 
   // Hide header/footer for admin page
@@ -30,15 +30,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     return <>{children}</>;
   }
   
-  // Hide header/footer for enrichment section (MOE compliance - no tuition promotion)
-  if (isEnrichmentSection) {
+  // Hide header/footer for school section (MOE compliance - no tuition promotion)
+  if (isSchoolSection) {
     return (
       <div className="min-h-screen flex flex-col bg-surface font-sans text-slate-800">
         {/* Minimal Header for Enrichment Section */}
         <header className="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20 py-3">
-              <Link to="/enrichment" className="flex items-center space-x-3" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/schools" className="flex items-center space-x-3" onClick={() => setIsMenuOpen(false)}>
                 <div className="bg-gradient-to-br from-green-600 to-green-800 text-white px-3 py-2 rounded-lg font-bold text-xl tracking-tight shadow-md">
                   IL
                 </div>
@@ -49,8 +49,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               </Link>
               
               <nav className="hidden md:flex items-center space-x-6">
-                <Link to="/enrichment" className={`${isActive('/enrichment') ? 'text-green-700 font-semibold' : 'text-slate-600'} hover:text-green-700 transition text-sm`}>Program</Link>
-                <Link to="/enrichment/login" className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-lg">
+                <Link to="/schools" className={`${isActive('/schools') ? 'text-green-700 font-semibold' : 'text-slate-600'} hover:text-green-700 transition text-sm`}>Program</Link>
+                <Link to="/schools/login" className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-lg">
                   Student Login
                 </Link>
               </nav>
@@ -64,8 +64,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           {isMenuOpen && (
             <div className="md:hidden bg-white border-b border-slate-200 shadow-lg">
               <div className="px-4 py-6 space-y-4">
-                <button onClick={() => handleNav('/enrichment')} className="block w-full text-left py-2 font-medium text-slate-700">Program Overview</button>
-                <button onClick={() => handleNav('/enrichment/login')} className="block w-full text-center bg-green-600 text-white py-3 rounded-lg font-medium mt-4">Student Login</button>
+                <button onClick={() => handleNav('/schools')} className="block w-full text-left py-2 font-medium text-slate-700">Program Overview</button>
+                <button onClick={() => handleNav('/schools/login')} className="block w-full text-center bg-green-600 text-white py-3 rounded-lg font-medium mt-4">Student Login</button>
               </div>
             </div>
           )}
@@ -106,17 +106,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               </div>
             </Link>
 
-            {/* Desktop Nav - Main Landing */}
-            {isMainLanding && (
-              <nav className="hidden md:flex items-center space-x-6 h-full">
-                <Link to="/tuition" className="text-slate-600 hover:text-secondary transition text-sm">Tuition Services</Link>
-                <Link to="/enrichment" className="text-slate-600 hover:text-green-700 transition text-sm">School Programs</Link>
-                <a href="mailto:info@integratedlearnings.com.sg" className="bg-secondary hover:bg-blue-800 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-lg shadow-blue-900/20">
-                  Contact Us
-                </a>
-              </nav>
-            )}
-
             {/* Desktop Nav - Tuition Section */}
             {isTuitionSection && (
               <nav className="hidden md:flex items-center space-x-6 h-full">
@@ -152,17 +141,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </div>
 
-        {/* Mobile Menu - Main Landing */}
-        {isMenuOpen && isMainLanding && (
-          <div className="md:hidden bg-white border-b border-slate-200 shadow-lg">
-            <div className="px-4 py-6 space-y-4">
-              <button onClick={() => handleNav('/tuition')} className="block w-full text-left py-2 font-medium text-slate-700">Tuition Services</button>
-              <button onClick={() => handleNav('/enrichment')} className="block w-full text-left py-2 font-medium text-slate-700">School Programs</button>
-              <a href="mailto:info@integratedlearnings.com.sg" className="block w-full text-center bg-secondary text-white py-3 rounded-lg font-medium mt-4">Contact Us</a>
-            </div>
-          </div>
-        )}
-
         {/* Mobile Menu - Tuition Section */}
         {isMenuOpen && isTuitionSection && (
           <div className="md:hidden bg-white border-b border-slate-200 shadow-lg">
@@ -195,24 +173,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               }
             </p>
           </div>
-          <div>
-            <h4 className="text-white font-semibold mb-4">
-              {isTuitionSection ? 'Portals' : 'Our Services'}
-            </h4>
-            <ul className="space-y-2 text-sm">
-              {isTuitionSection ? (
-                <>
-                  <li><Link to="/tuition/parents" className="hover:text-white transition">Parent / Student Login</Link></li>
-                  <li><Link to="/tuition/tutors" className="hover:text-white transition">Tutor Partner Login</Link></li>
-                </>
-              ) : (
-                <>
-                  <li><Link to="/tuition" className="hover:text-white transition">Tuition Services</Link></li>
-                  <li><Link to="/enrichment" className="hover:text-white transition">School Programs</Link></li>
-                </>
-              )}
-            </ul>
-          </div>
+          {isTuitionSection && (
+            <div>
+              <h4 className="text-white font-semibold mb-4">Portals</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/tuition/parents" className="hover:text-white transition">Parent / Student Login</Link></li>
+                <li><Link to="/tuition/tutors" className="hover:text-white transition">Tutor Partner Login</Link></li>
+              </ul>
+            </div>
+          )}
           <div>
             <h4 className="text-white font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">

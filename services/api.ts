@@ -1,29 +1,7 @@
 
 import { StudentProfile, TutorProfile, TutorRequest } from '../types';
 import { createClient } from '@supabase/supabase-js';
-
-// --- CONFIGURATION ---
-// 1. Set USE_MOCK_DATA to false when you are ready to connect Supabase.
-// 2. Fill in your Supabase URL and Key below.
-const CONFIG = {
-  USE_MOCK_DATA: true, 
-  SUPABASE_URL: "https://your-project.supabase.co",
-  SUPABASE_KEY: "your-anon-key"
-};
-
-// --- REAL BACKEND CLIENT ---
-// Only initialize if we are NOT using mock data, to prevent crashes in preview envs without Supabase headers
-let supabase: any = null;
-try {
-  // Check if we have valid keys (not placeholders) before attempting connection
-  const hasKeys = CONFIG.SUPABASE_URL !== "https://your-project.supabase.co" && CONFIG.SUPABASE_KEY !== "your-anon-key";
-  
-  if (!CONFIG.USE_MOCK_DATA && hasKeys) {
-    supabase = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_KEY);
-  }
-} catch (e) {
-  console.warn("Supabase client failed to initialize (Mock Mode active)", e);
-}
+import { supabase, isSupabaseConfigured } from './supabase';
 
 // --- MOCK DATABASE (In-Memory Fallback) ---
 let MOCK_STUDENTS: StudentProfile[] = [
@@ -125,6 +103,78 @@ export const api = {
       // In production, verify against Database Hash.
       if (password === 'admin123') return true;
       return false;
+    }
+  },
+
+  // Form Submissions
+  forms: {
+    submitParentRequest: async (data: any) => {
+      if (!isSupabaseConfigured || !supabase) {
+        console.warn('Supabase not configured, using fallback');
+        return { success: false, message: 'Database not configured' };
+      }
+
+      try {
+        const { error } = await supabase
+          .from('parent_submissions')
+          .insert([{
+            student_name: data.studentName,
+            student_age: data.studentAge,
+            student_level: data.level,
+            current_grades: data.currentGrades,
+            subjects: data.subjects?.join(', '),
+            parent_name: data.parentName,
+            parent_email: data.parentEmail,
+            parent_phone: data.parentPhone,
+            location: data.location,
+            tuition_goal: data.tuitionGoal,
+            preferred_timing: data.preferredTiming,
+            budget_range: data.budgetRange,
+            status: 'pending',
+            submitted_at: new Date().toISOString()
+          }]);
+
+        if (error) throw error;
+        return { success: true, message: 'Application submitted successfully!' };
+      } catch (error: any) {
+        console.error('Parent submission error:', error);
+        return { success: false, message: error.message };
+      }
+    },
+
+    submitTutorRequest: async (data: any) => {
+      if (!isSupabaseConfigured || !supabase) {
+        console.warn('Supabase not configured, using fallback');
+        return { success: false, message: 'Database not configured' };
+      }
+
+      try {
+        const { error } = await supabase
+          .from('tutor_submissions')
+          .insert([{
+            tutor_name: data.tutorName,
+            tutor_email: data.tutorEmail,
+            tutor_phone: data.tutorPhone,
+            qualification: data.qualification,
+            experience_years: parseInt(data.experienceYears) || 0,
+            subjects: data.subjects?.join(', '),
+            levels_taught: data.levelsTaught?.join(', '),
+            education_background: data.educationBackground,
+            certifications: data.certifications,
+            hourly_rate: parseInt(data.hourlyRate) || 0,
+            preferred_areas: data.preferredAreas,
+            availability: data.availability,
+            bio: data.bio,
+            status: 'pending',
+            submitted_at: new Date().toISOString()
+          }]);
+
+        if (error) throw error;
+        return { success: true, message: 'Application submitted successfully!' };
+      } catch (error: any) {
+        console.error('Tutor submission error:', error);
+        return { success: false, message: error.message };
+      }
     }
   }
 };

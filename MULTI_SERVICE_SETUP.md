@@ -136,7 +136,7 @@ Test these URLs:
 
 Update these in your files as needed:
 - **Tuition**: manage.integrated.learnings@gmail.com / WhatsApp: 9888 2675
-- **Schools**: schools@integratedlearnings.com.sg
+- **Schools**: manage.integrated.learnings@gmail.com
 
 ---
 

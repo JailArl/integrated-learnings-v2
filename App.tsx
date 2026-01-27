@@ -8,7 +8,8 @@ import EnrichmentHome from './pages/EnrichmentHome';
 import { RoadmapLanding, RoadmapDetail } from './pages/Roadmap';
 import Pricing from './pages/Pricing';
 import { ParentDashboard, TutorDashboard } from './pages/Dashboards';
-import { AdminDashboard } from './pages/AdminDashboard'; 
+import { AdminDashboard } from './pages/AdminDashboard';
+import SchoolTeacherDashboard from './pages/SchoolTeacherDashboard'; 
 import { About, Contact, ExtraLearnings, HolidayPrograms, CourseworkSupport, Policies, TutorLanding, TutorRequest, SpecializedRequest } from './pages/ContentPages';
 import { Calendar } from './pages/Calendar';
 
@@ -57,8 +58,11 @@ const App: React.FC = () => {
           <Route path="/tuition/policies" element={<Policies />} />
           
           {/* School Enrichment Routes */}
-          <Route path="/enrichment" element={<EnrichmentHome />} />
-          <Route path="/enrichment/login" element={<div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="text-center"><h1 className="text-3xl font-bold text-gray-900 mb-4">Student Login</h1><p className="text-gray-600">Coming soon - Integration with game platform</p></div></div>} />
+          <Route path="/schools" element={<EnrichmentHome />} />
+          <Route path="/schools/login" element={<div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="text-center"><h1 className="text-3xl font-bold text-gray-900 mb-4">Student Login</h1><p className="text-gray-600">Coming soon - Integration with game platform</p></div></div>} />
+          <Route path="/schools/teacher-dashboard" element={<SchoolTeacherDashboard />} />
+          <Route path="/enrichment" element={<Navigate to="/schools" replace />} />
+          <Route path="/enrichment/login" element={<Navigate to="/schools/login" replace />} />
           
           {/* Legacy routes - redirect to tuition for backward compatibility */}
           <Route path="/roadmap" element={<Navigate to="/tuition/roadmap" replace />} />
