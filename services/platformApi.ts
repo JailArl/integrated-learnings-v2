@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf'; // TODO: Install jspdf package when needed
 
 // ============================================================================
 // PARENT API FUNCTIONS
@@ -477,7 +477,8 @@ export const getMatchesForInvoicing = async (): Promise<{
   }
 };
 
-export const generateInvoice = async (matchData: {
+// TODO: Uncomment when jspdf is installed
+/* export const generateInvoice = async (matchData: {
   matchId: string;
   requestId: string;
   parentName: string;
@@ -588,4 +589,4 @@ export const generateInvoice = async (matchData: {
     console.error('Generate invoice error:', error);
     return { success: false, error: error.message };
   }
-};
+}; */
