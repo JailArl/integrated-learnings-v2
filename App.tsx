@@ -11,6 +11,12 @@ import { ParentDashboard, TutorDashboard } from './pages/Dashboards';
 import { AdminDashboard } from './pages/AdminDashboard'; 
 import { About, Contact, ExtraLearnings, HolidayPrograms, CourseworkSupport, Policies, TutorLanding, TutorRequest, SpecializedRequest } from './pages/ContentPages';
 import { Calendar } from './pages/Calendar';
+import { ParentLogin } from './pages/ParentLogin';
+import { ParentSignup } from './pages/ParentSignup';
+import { TutorLogin } from './pages/TutorLogin';
+import { TutorSignup } from './pages/TutorSignup';
+import { NewParentDashboard } from './pages/NewParentDashboard';
+import { NewTutorDashboard } from './pages/NewTutorDashboard';
 
 // Protected Route for Coursework (Sec 4 only)
 const Sec4OnlyRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -42,6 +48,16 @@ const App: React.FC = () => {
           <Route path="/tuition/parents" element={<ParentDashboard />} />
           <Route path="/tuition/tutors" element={<TutorDashboard />} />
           <Route path="/tuition/teach" element={<TutorLanding />} />
+          
+          {/* Authentication Routes */}
+          <Route path="/parent-login" element={<ParentLogin />} />
+          <Route path="/parent-signup" element={<ParentSignup />} />
+          <Route path="/tutor-login" element={<TutorLogin />} />
+          <Route path="/tutor-signup" element={<TutorSignup />} />
+          
+          {/* New Dashboards */}
+          <Route path="/parents" element={<NewParentDashboard />} />
+          <Route path="/tutors" element={<NewTutorDashboard />} />
           <Route path="/tuition/about" element={<About />} />
           <Route path="/tuition/contact" element={<Contact />} />
           <Route path="/tuition/request" element={<TutorRequest />} />
@@ -64,8 +80,6 @@ const App: React.FC = () => {
           <Route path="/roadmap" element={<Navigate to="/tuition/roadmap" replace />} />
           <Route path="/roadmap/:topicId" element={<Navigate to="/tuition/roadmap/:topicId" replace />} />
           <Route path="/pricing" element={<Navigate to="/tuition/pricing" replace />} />
-          <Route path="/parents" element={<Navigate to="/tuition/parents" replace />} />
-          <Route path="/tutors" element={<Navigate to="/tuition/tutors" replace />} />
           <Route path="/teach" element={<Navigate to="/tuition/teach" replace />} />
           <Route path="/about" element={<Navigate to="/tuition/about" replace />} />
           <Route path="/contact" element={<Navigate to="/tuition/contact" replace />} />
