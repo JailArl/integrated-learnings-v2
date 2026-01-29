@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Section, Card, Button } from './Components';
-import { getMatchesForInvoicing, generateInvoice } from '../services/platformApi';
+import { getMatchesForInvoicing } from '../services/platformApi';
 
 interface Match {
   id: string;
@@ -53,36 +53,8 @@ export const AdminInvoices: React.FC = () => {
     setSuccessMessage(null);
     setGeneratedInvoiceUrl(null);
 
-    // Extract parent name - handle nested structure from query
-    let parentName = 'Unknown Parent';
-    if (match.request?.parent?.full_name) {
-      parentName = match.request.parent.full_name;
-    }
-
-    const invoiceData = {
-      matchId: match.id,
-      requestId: match.request_id,
-      parentName: parentName,
-      studentName: match.request?.student_name || 'Unknown Student',
-      tutorName: match.tutor?.full_name || 'Unknown Tutor',
-      hourlyRate: match.tutor?.hourly_rate || 0,
-      diagnosticTestBooked: match.request?.diagnostic_test_booked || false,
-    };
-
-    const result = await generateInvoice(invoiceData);
-
-    if (result.success && result.invoiceUrl) {
-      setSuccessMessage('Invoice generated successfully!');
-      setGeneratedInvoiceUrl(result.invoiceUrl);
-      setTimeout(() => {
-        setSuccessMessage(null);
-        setGeneratedInvoiceUrl(null);
-      }, 10000);
-      fetchMatches();
-    } else {
-      setError(result.error || 'Failed to generate invoice');
-    }
-
+    // Invoice generation is not yet implemented
+    setError('Invoice generation feature is currently unavailable.');
     setGeneratingInvoice(null);
   };
 

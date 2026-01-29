@@ -56,20 +56,14 @@ export const signUpParent = async (
   }
 };
 
-// Sign up a tutor
+// Sign up a tutor (simplified - detailed info collected later)
 export const signUpTutor = async (
   email: string,
   password: string,
   data: {
     fullName: string;
     phone?: string;
-    qualification: string;
-    experienceYears: number;
-    subjects: string[];
-    levels: string[];
-    hourlyRate: number;
-  },
-  questionnaireAnswers: any
+  }
 ): Promise<{ success: boolean; error?: string; user?: any }> => {
   if (!supabase) {
     return { success: false, error: 'Supabase not configured' };
@@ -91,7 +85,8 @@ export const signUpTutor = async (
     if (authError) throw authError;
     if (!authData.user) throw new Error('User creation failed');
 
-    // Create tutor profile
+    // Create tutor profile with basic info only
+    // Detailed info (qualification, subjects, levels, experience, etc.) collected later
     const { error: profileError } = await supabase
       .from('tutor_profiles')
       .insert([
@@ -100,12 +95,6 @@ export const signUpTutor = async (
           full_name: data.fullName,
           email: email,
           phone: data.phone || null,
-          qualification: data.qualification,
-          experience_years: data.experienceYears,
-          subjects: data.subjects,
-          levels: data.levels,
-          hourly_rate: data.hourlyRate,
-          questionnaire_answers: questionnaireAnswers,
           verification_status: 'pending',
         },
       ]);

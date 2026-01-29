@@ -10,6 +10,7 @@ import Pricing from './pages/Pricing';
 import { ParentDashboard, TutorDashboard } from './pages/Dashboards';
 import { AdminDashboard } from './pages/AdminDashboard'; 
 import { About, Contact, ExtraLearnings, HolidayPrograms, CourseworkSupport, Policies, TutorLanding, TutorRequest, SpecializedRequest } from './pages/ContentPages';
+import ServiceDetail from './pages/ServiceDetail';
 import { Calendar } from './pages/Calendar';
 import { ParentLogin } from './pages/ParentLogin';
 import { ParentSignup } from './pages/ParentSignup';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           
           {/* Tuition Service Routes */}
           <Route path="/tuition" element={<TuitionHome />} />
+          <Route path="/service/:serviceId" element={<ServiceDetail />} />
           <Route path="/tuition/roadmap" element={<RoadmapLanding />} />
           <Route path="/tuition/roadmap/:topicId" element={<RoadmapDetail />} />
           <Route path="/tuition/pricing" element={<Pricing />} />

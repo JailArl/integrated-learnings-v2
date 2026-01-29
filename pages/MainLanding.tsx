@@ -1,81 +1,77 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight, Zap, BookOpen, Users } from 'lucide-react';
 
 const MainLanding: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex flex-col">
-      {/* Main Section - Two Buttons */}
-      <section className="flex-1 flex items-center justify-center px-4 py-20">
-        <div className="max-w-5xl w-full">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-16 text-center">
-            Integrated Learnings
-          </h1>
-          
-          {/* Two Buttons */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Parents Button */}
-            <Link to="/tuition">
-              <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-12 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 group">
-                <div className="flex items-center justify-between">
-                  <ArrowLeft className="w-8 h-8 group-hover:-translate-x-2 transition-transform" />
-                  <div className="flex-1">
-                    <h2 className="text-3xl font-bold mb-2">Parents</h2>
-                    <p className="text-blue-100">Tuition Services</p>
-                  </div>
-                </div>
-              </button>
-            </Link>
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 flex flex-col text-white">
+      {/* Hero Section */}
+      <section className="flex-1 flex items-center justify-center px-4 py-20 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+        
+        <div className="max-w-5xl w-full relative z-10">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-tight">
+              Strategic Learning.<br />
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">Measurable Excellence.</span>
+            </h1>
+            
+            <p className="mt-6 max-w-3xl mx-auto text-xl md:text-2xl text-slate-300 leading-relaxed font-light mb-8">
+              Diagnostic-driven matching for academic success. From strategic educator pairing to long-term academic planning—we engineer results.
+            </p>
+            
+            <div className="flex flex-col md:flex-row gap-6 justify-center max-w-3xl mx-auto">
+              <Link to="/tuition" className="flex-1">
+                <button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-2xl shadow-blue-900/50 hover:shadow-3xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 group">
+                  For Families
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
 
-            {/* Schools Button */}
-            <Link to="/enrichment">
-              <button className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-12 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 group">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <h2 className="text-3xl font-bold mb-2">Schools</h2>
-                    <p className="text-green-100">Enrichment Programs</p>
-                  </div>
-                  <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
-                </div>
-              </button>
-            </Link>
+              <Link to="/enrichment" className="flex-1">
+                <button className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-4 px-8 rounded-xl font-bold text-lg shadow-2xl shadow-emerald-900/50 hover:shadow-3xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 group">
+                  For Schools
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Company Vision & Mission */}
-      <section className="container mx-auto px-4 pb-20">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-lg p-10 border border-gray-100">
-            <div className="space-y-8">
-              {/* Vision */}
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  To be Singapore's most trusted educational partner, empowering every student to achieve academic excellence and develop lifelong learning skills.
-                </p>
-              </div>
+      {/* Why We Exist */}
+      <section className="bg-gradient-to-r from-blue-900 via-slate-900 to-slate-900 px-4 py-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Vision */}
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
+              <Zap className="w-12 h-12 text-blue-300 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-3">Our Vision</h3>
+              <p className="text-slate-200 leading-relaxed">
+                Singapore's most trusted education consultancy—where diagnostic expertise meets human connection.
+              </p>
+            </div>
 
-              {/* Mission */}
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  We provide innovative, personalized learning solutions that address the unique needs of each student. 
-                  From one-to-one tuition with verified educators to interactive financial literacy programs for schools, 
-                  we're committed to excellence in education and preparing students for success in school and in life.
-                </p>
-              </div>
+            {/* Mission */}
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
+              <BookOpen className="w-12 h-12 text-blue-300 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-3">Our Mission</h3>
+              <p className="text-slate-200 leading-relaxed">
+                We eliminate guesswork from education. Every family gets one diagnostic assessment, one perfect match, one clear path forward.
+              </p>
+            </div>
 
-              {/* Values */}
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Values</h3>
-                <ul className="text-lg text-gray-700 leading-relaxed space-y-2">
-                  <li>• <strong>Excellence:</strong> We strive for the highest quality in every educational experience</li>
-                  <li>• <strong>Integrity:</strong> We build trust through transparency and accountability</li>
-                  <li>• <strong>Innovation:</strong> We embrace new approaches to enhance learning outcomes</li>
-                  <li>• <strong>Student-Centered:</strong> Every decision is made with the student's best interest in mind</li>
-                </ul>
-              </div>
+            {/* Values */}
+            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8">
+              <Users className="w-12 h-12 text-blue-300 mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-3">Our Values</h3>
+              <p className="text-slate-200 leading-relaxed">
+                Transparency. Excellence. Flexibility. We operate without long-term lock-ins, hidden fees, or false promises.
+              </p>
             </div>
           </div>
         </div>
@@ -85,8 +81,3 @@ const MainLanding: React.FC = () => {
 };
 
 export default MainLanding;
-          
-          {/* Tuition Service Card */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-8 text-white">
-              <GraduationCap className="w-16 h-16 mb-4" />

@@ -212,36 +212,43 @@ export const SERVICES: ServiceBlock[] = [
     id: 'primary',
     title: 'Primary Tuition',
     description: 'English, Math, Science, Chinese. Mastery of concepts for PSLE.',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop', // Child writing/studying
-    link: '/contact'
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop',
+    link: '/service/primary'
   },
   {
     id: 'secondary',
     title: 'Secondary Tuition',
     description: 'Specialised tutors for G3, G2, and G1 streams.',
-    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=800&auto=format&fit=crop', // Student in library
-    link: '/contact'
+    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=800&auto=format&fit=crop',
+    link: '/service/secondary'
+  },
+  {
+    id: 'aeis',
+    title: 'AEIS Preparation',
+    description: 'Strategic preparation for the Admissions Exercise for International Students.',
+    image: 'https://images.unsplash.com/photo-1427504494785-cdfc993e38ae?q=80&w=800&auto=format&fit=crop',
+    link: '/service/aeis'
   },
   {
     id: 'jc',
     title: 'JC / IB / IGCSE',
     description: 'Advanced consultation for high-stakes examinations.',
-    image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop', // Intensive study/books
-    link: '/contact'
+    image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop',
+    link: '/service/jc'
   },
   {
     id: 'extra',
     title: 'Extra Learnings',
     description: 'Financial Literacy, Coding, Sports. Building life skills.',
-    image: 'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=800&auto=format&fit=crop', // Coding/Tech
-    link: '/extra'
+    image: 'https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=800&auto=format&fit=crop',
+    link: '/service/extra'
   },
   {
     id: 'holiday',
     title: 'Holiday Programs',
     description: 'Head-start bootcamps and intensive revision weeks.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop', // Group study
-    link: '/holiday'
+    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop',
+    link: '/service/holiday'
   }
 ];
 

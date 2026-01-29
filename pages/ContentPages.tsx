@@ -282,64 +282,6 @@ export const About: React.FC = () => (
     </div>
 
     <Section>
-       <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-             <h2 className="text-3xl font-bold text-primary mb-4">Why Parents Choose Integrated Learnings</h2>
-             <p className="text-slate-600">We're not a tutoring marketplace. We're a partner in your child's academic journey.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-             <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-                <h3 className="text-xl font-bold text-primary mb-3 flex items-center">
-                  <Microscope size={24} className="mr-3 text-secondary" />
-                  Diagnosis Before Drilling
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                   We never assume the problem. Subject knowledge gaps, exam anxiety, or careless mistakes—each needs a different tutor. We find the root cause first.
-                </p>
-             </div>
-             <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-                <h3 className="text-xl font-bold text-primary mb-3 flex items-center">
-                  <TrendingUp size={24} className="mr-3 text-secondary" />
-                  Long-Term Planning
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                   We prepare students for the next milestone, not just the next test. Your child's tutor works with a 2–3 year roadmap aligned to Singapore's education system.
-                </p>
-             </div>
-             <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-                <h3 className="text-xl font-bold text-primary mb-3 flex items-center">
-                  <Shield size={24} className="mr-3 text-secondary" />
-                  Vetted Tutors
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                   Our tutors are screened for subject expertise, teaching quality, and the soft skills that build student confidence. We reject those who don't meet our bar.
-                </p>
-             </div>
-             <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-                <h3 className="text-xl font-bold text-primary mb-3 flex items-center">
-                  <Clock size={24} className="mr-3 text-secondary" />
-                  Ongoing Support
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                   We don't disappear after the first lesson. We track progress, support both tutor and student, and step in if adjustments are needed.
-                </p>
-             </div>
-          </div>
-
-          <div className="mt-16 text-center bg-gradient-to-r from-blue-50 to-slate-50 p-8 rounded-2xl border border-slate-200">
-             <h3 className="text-2xl font-bold text-primary mb-4">Ready to Skip the Guesswork?</h3>
-             <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
-                Your Right Fit Assessment is the fastest path to a tutor who actually works for your child.
-             </p>
-             <Button to="/parents" className="px-10 py-3 font-bold text-lg">
-                Start with Your Right Fit Assessment
-             </Button>
-          </div>
-       </div>
-    </Section>
-
-    <Section>
       <div className="mt-20 pt-12 border-t border-slate-200">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">Singapore's Education Roadmap</h2>

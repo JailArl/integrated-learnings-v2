@@ -106,7 +106,7 @@ const TuitionHome: React.FC = () => {
             </div>
             <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
               <p className="text-2xl font-bold text-blue-200 mb-2">Limited</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wide">Monthly CLA Intake</p>
+              <p className="text-xs text-slate-300 uppercase tracking-wide">Monthly Intake</p>
             </div>
             <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
               <p className="text-2xl font-bold text-blue-200 mb-2">Fast</p>
@@ -374,7 +374,7 @@ const TuitionHome: React.FC = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: "Diagnostic-First Approach", desc: "90-min Comprehensive Learning Assessment before matching" },
+                { title: "Diagnostic-First Approach", desc: "90-min Right Fit Assessment before matching" },
                 { title: "Singapore Education Expertise", desc: "FSBB/SBB, DSA, O-Level, PSLE pathway specialists" },
                 { title: "Character-Vetted Tutors", desc: "80% rejection rate • Only qualified educators with proven track records" },
                 { title: "Real-Time Dashboards", desc: "Parents see lesson schedules, progress reports, and payment history" },

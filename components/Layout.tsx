@@ -101,7 +101,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <div className="hidden sm:block">
                 <span className="font-bold text-xl text-primary tracking-tight leading-tight">Integrated Learnings</span>
                 <p className="text-xs text-slate-500 -mt-1">
-                  {isTuitionSection ? 'Tuition Services' : isMainLanding ? 'Education Consultancy' : 'Education Consultancy'}
+                  {isTuitionSection ? 'For Families' : isMainLanding ? 'Education Consultancy' : 'Education Consultancy'}
                 </p>
               </div>
             </Link>
@@ -109,7 +109,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Desktop Nav - Main Landing */}
             {isMainLanding && (
               <nav className="hidden md:flex items-center space-x-6 h-full">
-                <Link to="/tuition" className="text-slate-600 hover:text-secondary transition text-sm">Tuition Services</Link>
+                <Link to="/tuition" className="text-slate-600 hover:text-secondary transition text-sm">For Families</Link>
                 <Link to="/enrichment" className="text-slate-600 hover:text-green-700 transition text-sm">School Programs</Link>
                 <a href="mailto:info@integratedlearnings.com.sg" className="bg-secondary hover:bg-blue-800 text-white px-5 py-2 rounded-full text-sm font-medium transition shadow-lg shadow-blue-900/20">
                   Contact Us
@@ -156,7 +156,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {isMenuOpen && isMainLanding && (
           <div className="md:hidden bg-white border-b border-slate-200 shadow-lg">
             <div className="px-4 py-6 space-y-4">
-              <button onClick={() => handleNav('/tuition')} className="block w-full text-left py-2 font-medium text-slate-700">Tuition Services</button>
+              <button onClick={() => handleNav('/tuition')} className="block w-full text-left py-2 font-medium text-slate-700">For Families</button>
               <button onClick={() => handleNav('/enrichment')} className="block w-full text-left py-2 font-medium text-slate-700">School Programs</button>
               <a href="mailto:info@integratedlearnings.com.sg" className="block w-full text-center bg-secondary text-white py-3 rounded-lg font-medium mt-4">Contact Us</a>
             </div>
@@ -207,7 +207,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </>
               ) : (
                 <>
-                  <li><Link to="/tuition" className="hover:text-white transition">Tuition Services</Link></li>
+                  <li><Link to="/tuition" className="hover:text-white transition">For Families</Link></li>
                   <li><Link to="/enrichment" className="hover:text-white transition">School Programs</Link></li>
                 </>
               )}

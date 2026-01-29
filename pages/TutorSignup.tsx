@@ -1,164 +1,63 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signUpTutor } from '../services/auth';
-import { Section } from '../components/Components';
-
-const SUBJECTS = [
-  'English', 'Mathematics', 'Science', 
-  'Elementary Math (E-Math)', 'Additional Math (A-Math)',
-  'Pure Physics', 'Pure Chemistry', 'Pure Biology',
-  'Chinese', 'Malay', 'Tamil',
-  'History', 'Geography', 'Literature',
-  'General Paper (GP)', 'H1 Mathematics', 'H2 Mathematics',
-  'H1 Physics', 'H2 Physics', 'H1 Chemistry', 'H2 Chemistry',
-  'H1 Biology', 'H2 Biology', 'H1 Economics', 'H2 Economics'
-];
-
-const LEVELS = [
-  'Primary 1', 'Primary 2', 'Primary 3', 'Primary 4', 'Primary 5', 'Primary 6',
-  'Secondary 1', 'Secondary 2', 'Secondary 3', 'Secondary 4', 'Secondary 5',
-  'JC 1', 'JC 2'
-];
+import { PageHeader, Section } from '../components/Components';
+import { Mail, Lock, Phone, User } from 'lucide-react';
 
 export const TutorSignup: React.FC = () => {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(1);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  // Step 1: Basic Info
-  const [basicInfo, setBasicInfo] = useState({
+  const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
     phone: '',
-    qualification: '',
-    experienceYears: '',
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  // Step 2: Teaching Details
-  const [teachingDetails, setTeachingDetails] = useState({
-    subjects: [] as string[],
-    levels: [] as string[],
-    hourlyRate: '',
-  });
-
-  // Step 3: Questionnaire
-  const [questionnaire, setQuestionnaire] = useState({
-    strugglingStudentApproach: '',
-    teachingMethodology: '',
-    confidenceBuilding: '',
-    teachingStyle: 'balanced',
-    preferredFormat: 'flexible',
-  });
-
-  const handleBasicInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setBasicInfo({ ...basicInfo, [e.target.name]: e.target.value });
-  };
-
-  const handleTeachingDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTeachingDetails({ ...teachingDetails, [e.target.name]: e.target.value });
-  };
-
-  const handleSubjectToggle = (subject: string) => {
-    setTeachingDetails(prev => ({
-      ...prev,
-      subjects: prev.subjects.includes(subject)
-        ? prev.subjects.filter(s => s !== subject)
-        : [...prev.subjects, subject]
-    }));
-  };
-
-  const handleLevelToggle = (level: string) => {
-    setTeachingDetails(prev => ({
-      ...prev,
-      levels: prev.levels.includes(level)
-        ? prev.levels.filter(l => l !== level)
-        : [...prev.levels, level]
-    }));
-  };
-
-  const handleQuestionnaireChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>) => {
-    setQuestionnaire({ ...questionnaire, [e.target.name]: e.target.value });
-  };
-
-  const validateStep1 = () => {
-    if (!basicInfo.fullName || !basicInfo.email || !basicInfo.password || !basicInfo.qualification || !basicInfo.experienceYears) {
-      setError('Please fill in all required fields');
-      return false;
-    }
-    if (basicInfo.password !== basicInfo.confirmPassword) {
-      setError('Passwords do not match');
-      return false;
-    }
-    if (basicInfo.password.length < 6) {
-      setError('Password must be at least 6 characters');
-      return false;
-    }
-    return true;
-  };
-
-  const validateStep2 = () => {
-    if (teachingDetails.subjects.length === 0) {
-      setError('Please select at least one subject');
-      return false;
-    }
-    if (teachingDetails.levels.length === 0) {
-      setError('Please select at least one level');
-      return false;
-    }
-    if (!teachingDetails.hourlyRate || parseInt(teachingDetails.hourlyRate) <= 0) {
-      setError('Please enter a valid hourly rate');
-      return false;
-    }
-    return true;
-  };
-
-  const validateStep3 = () => {
-    if (!questionnaire.strugglingStudentApproach || !questionnaire.teachingMethodology || !questionnaire.confidenceBuilding) {
-      setError('Please answer all questionnaire questions');
-      return false;
-    }
-    return true;
-  };
-
-  const handleNext = () => {
-    setError('');
-    
-    if (currentStep === 1 && validateStep1()) {
-      setCurrentStep(2);
-    } else if (currentStep === 2 && validateStep2()) {
-      setCurrentStep(3);
-    }
-  };
-
-  const handleBack = () => {
-    setError('');
-    setCurrentStep(currentStep - 1);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!validateStep3()) return;
+    if (!formData.fullName || !formData.email || !formData.password) {
+      setError('Please fill in all required fields');
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters');
+      return;
+    }
+
+    if (!formData.email.includes('@')) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    if (!formData.phone.trim()) {
+      setError('Please enter a valid phone number');
+      return;
+    }
 
     setLoading(true);
 
     const result = await signUpTutor(
-      basicInfo.email,
-      basicInfo.password,
+      formData.email,
+      formData.password,
       {
-        fullName: basicInfo.fullName,
-        phone: basicInfo.phone,
-        qualification: basicInfo.qualification,
-        experienceYears: parseInt(basicInfo.experienceYears),
-        subjects: teachingDetails.subjects,
-        levels: teachingDetails.levels,
-        hourlyRate: parseInt(teachingDetails.hourlyRate),
-      },
-      questionnaire
+        fullName: formData.fullName,
+        phone: formData.phone,
+      }
     );
 
     setLoading(false);
@@ -168,306 +67,156 @@ export const TutorSignup: React.FC = () => {
       return;
     }
 
-    alert('Signup successful! Your application is pending verification. Please check your email.');
-    navigate('/login/tutor');
+    alert('Account created successfully! Please log in with your email and password.');
+    navigate('/tutors/login');
   };
 
   return (
-    <Section className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Tutor Signup</h1>
-          <p className="text-gray-600 mb-6">Join our platform and start teaching</p>
-
-          {/* Progress Steps */}
-          <div className="flex items-center justify-between mb-8">
-            {[1, 2, 3].map((step) => (
-              <div key={step} className="flex items-center flex-1">
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full ${
-                  currentStep >= step ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-600'
-                }`}>
-                  {step}
-                </div>
-                {step < 3 && <div className={`flex-1 h-1 ${currentStep > step ? 'bg-blue-600' : 'bg-gray-300'}`} />}
-              </div>
-            ))}
-          </div>
-
-          {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-              {error}
+    <div>
+      <PageHeader 
+        title="Join Our Educator Network" 
+        subtitle="Create your account and start connecting with students" 
+      />
+      
+      <Section className="bg-gradient-to-br from-green-50 to-slate-50 py-12">
+        <div className="max-w-md mx-auto">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-green-200">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Educator Signup</h2>
+              <p className="text-gray-600">Quick signup - detailed information collected later</p>
             </div>
-          )}
 
-          <form onSubmit={handleSubmit}>
-            {/* Step 1: Basic Info */}
-            {currentStep === 1 && (
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold mb-4">Step 1: Basic Information</h2>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={basicInfo.fullName}
-                    onChange={handleBasicInfoChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={basicInfo.email}
-                    onChange={handleBasicInfoChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={basicInfo.phone}
-                    onChange={handleBasicInfoChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Qualification *</label>
-                  <input
-                    type="text"
-                    name="qualification"
-                    value={basicInfo.qualification}
-                    onChange={handleBasicInfoChange}
-                    placeholder="e.g., NIE Trained, NUS Graduate"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Years of Experience *</label>
-                  <input
-                    type="number"
-                    name="experienceYears"
-                    value={basicInfo.experienceYears}
-                    onChange={handleBasicInfoChange}
-                    min="0"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Password *</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={basicInfo.password}
-                    onChange={handleBasicInfoChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                    minLength={6}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Confirm Password *</label>
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    value={basicInfo.confirmPassword}
-                    onChange={handleBasicInfoChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <button type="button" onClick={handleNext} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-200">
-                  Next
-                </button>
+            {error && (
+              <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                {error}
               </div>
             )}
 
-            {/* Step 2: Teaching Details */}
-            {currentStep === 2 && (
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold mb-4">Step 2: Teaching Details</h2>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Subjects Taught *</label>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto border border-gray-300 rounded-lg p-3">
-                    {SUBJECTS.map(subject => (
-                      <label key={subject} className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={teachingDetails.subjects.includes(subject)}
-                          onChange={() => handleSubjectToggle(subject)}
-                          className="rounded"
-                        />
-                        <span className="text-sm">{subject}</span>
-                      </label>
-                    ))}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <div className="flex items-center gap-2">
+                    <User size={16} className="text-green-600" />
+                    Full Name *
                   </div>
-                </div>
+                </label>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Enter your full name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                  required
+                />
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Levels Taught *</label>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 border border-gray-300 rounded-lg p-3">
-                    {LEVELS.map(level => (
-                      <label key={level} className="flex items-center space-x-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={teachingDetails.levels.includes(level)}
-                          onChange={() => handleLevelToggle(level)}
-                          className="rounded"
-                        />
-                        <span className="text-sm">{level}</span>
-                      </label>
-                    ))}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <div className="flex items-center gap-2">
+                    <Mail size={16} className="text-green-600" />
+                    Email Address *
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Hourly Rate (SGD) *</label>
-                  <input
-                    type="number"
-                    name="hourlyRate"
-                    value={teachingDetails.hourlyRate}
-                    onChange={handleTeachingDetailsChange}
-                    min="0"
-                    placeholder="e.g., 50"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div className="flex space-x-4">
-                  <button type="button" onClick={handleBack} className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-3 px-6 rounded-lg font-semibold transition duration-200">
-                    Back
-                  </button>
-                  <button type="button" onClick={handleNext} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-200">
-                    Next
-                  </button>
-                </div>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="your.email@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                  required
+                />
               </div>
-            )}
 
-            {/* Step 3: Questionnaire */}
-            {currentStep === 3 && (
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold mb-4">Step 3: Teaching Philosophy</h2>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    How do you handle a struggling student? *
-                  </label>
-                  <textarea
-                    name="strugglingStudentApproach"
-                    value={questionnaire.strugglingStudentApproach}
-                    onChange={handleQuestionnaireChange}
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Describe your teaching methodology *
-                  </label>
-                  <textarea
-                    name="teachingMethodology"
-                    value={questionnaire.teachingMethodology}
-                    onChange={handleQuestionnaireChange}
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    What's your approach to building student confidence? *
-                  </label>
-                  <textarea
-                    name="confidenceBuilding"
-                    value={questionnaire.confidenceBuilding}
-                    onChange={handleQuestionnaireChange}
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Are you patient or strict? *
-                  </label>
-                  <select
-                    name="teachingStyle"
-                    value={questionnaire.teachingStyle}
-                    onChange={handleQuestionnaireChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  >
-                    <option value="patient">Patient</option>
-                    <option value="balanced">Balanced</option>
-                    <option value="strict">Strict</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Preferred teaching format? *
-                  </label>
-                  <select
-                    name="preferredFormat"
-                    value={questionnaire.preferredFormat}
-                    onChange={handleQuestionnaireChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    required
-                  >
-                    <option value="structured">Structured</option>
-                    <option value="flexible">Flexible</option>
-                    <option value="student-led">Student-led</option>
-                  </select>
-                </div>
-
-                <div className="flex space-x-4">
-                  <button type="button" onClick={handleBack} className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-3 px-6 rounded-lg font-semibold transition duration-200">
-                    Back
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {loading ? 'Submitting...' : 'Complete Signup'}
-                  </button>
-                </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <div className="flex items-center gap-2">
+                    <Lock size={16} className="text-green-600" />
+                    Password *
+                  </div>
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Minimum 6 characters"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                  required
+                />
+                <p className="text-xs text-gray-500 mt-1">Must be at least 6 characters long</p>
               </div>
-            )}
-          </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Already have an account?{' '}
-              <Link to="/login/tutor" className="text-blue-600 hover:text-blue-700 font-medium">
-                Login here
-              </Link>
-            </p>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <div className="flex items-center gap-2">
+                    <Lock size={16} className="text-green-600" />
+                    Confirm Password *
+                  </div>
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Re-enter your password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <div className="flex items-center gap-2">
+                    <Phone size={16} className="text-green-600" />
+                    Phone Number *
+                  </div>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="+65 XXXX XXXX"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full py-3 px-4 rounded-lg font-semibold text-white transition duration-200 mt-6 ${
+                  loading
+                    ? 'bg-green-400 cursor-not-allowed'
+                    : 'bg-green-600 hover:bg-green-700 active:bg-green-800'
+                }`}
+              >
+                {loading ? 'Creating Account...' : 'Create Account'}
+              </button>
+            </form>
+
+            <div className="mt-6 text-center border-t border-gray-200 pt-6">
+              <p className="text-gray-600 text-sm">
+                Already have an account?{' '}
+                <Link to="/tutors/login" className="text-green-600 font-semibold hover:text-green-700">
+                  Log In
+                </Link>
+              </p>
+            </div>
+
+            <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+              <p className="text-xs text-gray-700">
+                <strong>ℹ️ What's Next?</strong><br />
+                After signup, you'll provide qualifications, subjects, experience, and upload documents for verification.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+    </div>
   );
 };
+
+export default TutorSignup;
