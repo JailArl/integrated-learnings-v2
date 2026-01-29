@@ -55,19 +55,19 @@ export const ServiceDetail: React.FC = () => {
               {isLoggedIn ? (
                 <>
                   <p className="text-slate-700 mb-6">
-                    You're logged in! Proceed to book your Right Fit Assessment for this service.
+                    You're logged in! Proceed to request your tutor match for this service.
                   </p>
-                  <Button to="/parents/dashboard" className="w-full mb-4">
+                  <Button to="/parents" className="w-full mb-4">
                     View Your Dashboard
                   </Button>
                   <Button to="/parents" variant="outline" className="w-full">
-                    Book Assessment
+                    Request Tutor Match
                   </Button>
                 </>
               ) : (
                 <>
                   <p className="text-slate-700 mb-6">
-                    Ready to explore {service.title.toLowerCase()}? Start by logging in or creating an account to book your personalized Right Fit Assessment.
+                    Ready to explore {service.title.toLowerCase()}? Start by logging in or creating an account to request your tutor match.
                   </p>
                   <Button to="/parents/login" className="w-full mb-3">
                     Parent Login
@@ -87,7 +87,7 @@ export const ServiceDetail: React.FC = () => {
                 <div className="text-2xl text-secondary flex-shrink-0">✓</div>
                 <div>
                   <h4 className="font-bold text-slate-900 mb-2">Expert-Led Diagnostics</h4>
-                  <p className="text-slate-600">Our Right Fit Assessment identifies your child's specific needs and learning style.</p>
+                  <p className="text-slate-600">Our diagnostic matching identifies your child's specific needs and learning style.</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -121,7 +121,7 @@ export const ServiceDetail: React.FC = () => {
             </p>
             {isLoggedIn ? (
               <Button to="/parents" variant="white" className="px-10 py-3 text-lg font-bold">
-                Book Your Assessment
+                Request Tutor Match
               </Button>
             ) : (
               <>

@@ -249,22 +249,22 @@ export const PRICING_DATA: PricingTier[] = [
   {
     category: 'Primary',
     rates: [
-      { level: 'P1 - P4', pt: '$30 - $40', ft: '$40 - $50', moe: '$55 - $70' },
-      { level: 'P5 - P6', pt: '$30 - $40', ft: '$45 - $55', moe: '$65 - $80' }
+      { level: 'P1 - P4', pt: '$35 - $45', ft: '$45 - $55', moe: '$60 - $75' },
+      { level: 'P5 - P6', pt: '$35 - $45', ft: '$50 - $60', moe: '$70 - $85' }
     ]
   },
   {
     category: 'Secondary',
     rates: [
-      { level: 'Lower Sec (G3/G2)', pt: '$40 - $50', ft: '$50 - $65', moe: '$70 - $90' },
-      { level: 'Upper Sec (G3/G2)', pt: '$45 - $60', ft: '$60 - $75', moe: '$80 - $100' }
+      { level: 'Lower Sec (G3/G2)', pt: '$45 - $55', ft: '$55 - $70', moe: '$75 - $95' },
+      { level: 'Upper Sec (G3/G2)', pt: '$50 - $65', ft: '$65 - $80', moe: '$85 - $105' }
     ]
   },
   {
     category: 'Tertiary / Specialised',
     rates: [
-      { level: 'JC / IB', pt: '$60 - $80', ft: '$80 - $100', moe: '$100 - $120' },
-      { level: 'O-Lvl Coursework', pt: '$45+', ft: '$70+', moe: '$90+' }
+      { level: 'JC / IB', pt: '$65 - $90', ft: '$85 - $110', moe: '$105 - $130' },
+      { level: 'O-Lvl Coursework', pt: '$50+', ft: '$75+', moe: '$95+' }
     ]
   },
 ];

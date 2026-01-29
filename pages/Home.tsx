@@ -27,7 +27,7 @@ const Home: React.FC = () => {
     },
     {
       q: "Do you offer trial lessons?",
-      a: "Not formally, but many tutors offer a 30-min intro call before the first paid lesson. This is perfect for compatibility and learning style assessment."
+      a: "Not formally, but many tutors offer a 30-min intro call before the first paid lesson. This is perfect for compatibility and a quick learning-style check."
     }
   ];
   return (
@@ -92,11 +92,11 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* 🎯 RESULTS & GUARANTEES SECTION */}
+      {/* 🎯 RESULTS & OUTCOMES SECTION */}
       <Section className="bg-gradient-to-br from-green-50 to-emerald-50">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Proven Results. Guaranteed.</h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">Our students don't just improve—they transform. Here's the proof.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Proven Results. Real Outcomes.</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">Our students don't just improve—they transform. Here’s what families report.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -182,7 +182,7 @@ const Home: React.FC = () => {
               <p className="text-lg font-bold text-blue-600">Our Process</p>
               <p className="text-sm text-slate-600">Week 1</p>
             </div>
-            <h4 className="font-bold text-slate-900 mb-3">Right Fit Assessment</h4>
+            <h4 className="font-bold text-slate-900 mb-3">Diagnostic Match</h4>
             <ul className="text-sm text-slate-700 space-y-2">
               <li>✓ Diagnosed weak algebra foundations (not carelessness)</li>
               <li>✓ Identified visual learning preference</li>

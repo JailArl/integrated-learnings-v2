@@ -81,7 +81,23 @@ const App: React.FC = () => {
           
           {/* School Enrichment Routes */}
           <Route path="/enrichment" element={<EnrichmentHome />} />
-          <Route path="/enrichment/login" element={<div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="text-center"><h1 className="text-3xl font-bold text-gray-900 mb-4">Student Login</h1><p className="text-gray-600">Coming soon - Integration with game platform</p></div></div>} />
+          <Route path="/enrichment/login" element={
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+              <div className="text-center max-w-md">
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">Student Login</h1>
+                <p className="text-gray-600 mb-6">Access the Financial Literacy Game Platform</p>
+                <a 
+                  href="YOUR_GAME_URL_HERE" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-semibold transition shadow-lg"
+                >
+                  Launch Game Platform →
+                </a>
+                <p className="text-sm text-gray-500 mt-4">Opens in new tab</p>
+              </div>
+            </div>
+          } />
           
           {/* Legacy routes - redirect to tuition for backward compatibility */}
           <Route path="/roadmap" element={<Navigate to="/tuition/roadmap" replace />} />

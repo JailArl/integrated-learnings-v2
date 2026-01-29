@@ -578,7 +578,7 @@ export const ParentDashboard: React.FC = () => {
                       <div>
                          <p className="font-bold text-slate-800">Tutor Match (Direct)</p>
                          <p className="text-xs text-slate-600">Jan 10, 2026 • Matched based on your student profile and learning needs</p>
-                         <p className="text-xs text-slate-500 mt-1 italic">Skip the diagnostic? We match directly. Or request a Right Fit Assessment below.</p>
+                         <p className="text-xs text-slate-500 mt-1 italic">Diagnostic matching is included to improve fit. Optional live diagnostic sessions are available below.</p>
                       </div>
                    </div>
                    <div className="flex gap-3">
@@ -597,9 +597,9 @@ export const ParentDashboard: React.FC = () => {
                    </div>
                 </div>
                 
-                <div className="mt-6 pt-6 border-t border-slate-200">
-                   <h4 className="font-bold text-slate-800 mb-3 text-sm">Want a Right Fit Assessment First?</h4>
-                   <p className="text-xs text-slate-600 mb-3">Optional diagnostic to clarify your child's learning needs before lessons begin.</p>
+                 <div className="mt-6 pt-6 border-t border-slate-200">
+                   <h4 className="font-bold text-slate-800 mb-3 text-sm">Optional Live Diagnostic Session</h4>
+                   <p className="text-xs text-slate-600 mb-3">A deeper session to clarify learning needs before lessons begin.</p>
                    <div className="grid grid-cols-2 gap-2">
                       <Button variant="outline" className="text-xs h-auto py-2">Zoom Session (30 min)</Button>
                       <Button variant="outline" className="text-xs h-auto py-2">1-to-1 In-Person</Button>
