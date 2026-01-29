@@ -223,13 +223,6 @@ export const SERVICES: ServiceBlock[] = [
     link: '/service/secondary'
   },
   {
-    id: 'aeis',
-    title: 'AEIS Preparation',
-    description: 'Strategic preparation for the Admissions Exercise for International Students.',
-    image: 'https://images.unsplash.com/photo-1427504494785-cdfc993e38ae?q=80&w=800&auto=format&fit=crop',
-    link: '/service/aeis'
-  },
-  {
     id: 'jc',
     title: 'JC / IB / IGCSE',
     description: 'Advanced consultation for high-stakes examinations.',
