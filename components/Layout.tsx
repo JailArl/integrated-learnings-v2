@@ -121,7 +121,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             {isTuitionSection && (
               <nav className="hidden md:flex items-center space-x-6 h-full">
                 <Link to="/tuition" className={`${isActive('/tuition') ? 'text-secondary font-semibold' : 'text-slate-600'} hover:text-secondary transition text-sm`}>Home</Link>
-                <Link to="/tuition/about" className={`${isActive('/tuition/about') ? 'text-secondary font-semibold' : 'text-slate-600'} hover:text-secondary transition text-sm`}>About</Link>
                 <Link to="/tuition/pricing" className={`${isActive('/tuition/pricing') ? 'text-secondary font-semibold' : 'text-slate-600'} hover:text-secondary transition text-sm`}>Pricing</Link>
 
                 <div className="relative group h-full flex items-center">
@@ -168,7 +167,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="md:hidden bg-white border-b border-slate-200 shadow-lg">
             <div className="px-4 py-6 space-y-4">
               <button onClick={() => handleNav('/tuition')} className="block w-full text-left py-2 font-medium text-slate-700">Home</button>
-              <button onClick={() => handleNav('/tuition/about')} className="block w-full text-left py-2 font-medium text-slate-700">About Us</button>
               <hr className="border-slate-100" />
               <button onClick={() => handleNav('/tuition/parents')} className="block w-full text-left py-2 text-slate-600">Parent Login</button>
               <button onClick={() => handleNav('/tuition/tutors')} className="block w-full text-left py-2 text-slate-600">Tutor Login</button>

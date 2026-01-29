@@ -14,15 +14,15 @@ export const About: React.FC = () => (
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-            Stop Tutor Shopping. Start with a Diagnosis.
+            Request the Right Tutor, From Day One.
           </h2>
           <p className="text-xl text-slate-600 mb-6 leading-relaxed">
-            Parents spend <strong>months</strong> and <strong>hundreds of dollars</strong> switching tutors, hoping to find the right fit. 
-            What if you could get it right the first time?
+            Parents lose precious time switching tutors and waiting for progress. 
+            We help you request a tutor with the right fit from the start.
           </p>
           <p className="text-lg text-slate-500">
-            Our <strong className="text-secondary">Right Fit Assessment</strong> is your shortcut. 
-            One diagnostic session. One matched tutor. One path forward.
+            Our <strong className="text-secondary">Premium Diagnostic Matching</strong> removes guesswork. 
+            One diagnostic, one matched tutor, one clear path forward.
           </p>
         </div>
 
@@ -55,10 +55,10 @@ export const About: React.FC = () => (
     {/* The Right Fit Assessment Section */}
     <Section>
        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">The Right Fit Assessment</h2>
-             <p className="text-lg text-slate-600">How we skip the tutor-shopping cycle and get you the right match on your first try.</p>
-          </div>
+           <div className="text-center mb-12">
+             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">How Premium Matching Works</h2>
+             <p className="text-lg text-slate-600">A diagnostic-first approach that gets you the right tutor without trial and error.</p>
+           </div>
           
           <div className="grid md:grid-cols-3 gap-6 mb-12">
              <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-sm border border-blue-100">
@@ -86,31 +86,31 @@ export const About: React.FC = () => (
 
           <div className="bg-slate-50 border-2 border-secondary/20 rounded-2xl p-8 md:p-12">
              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-primary mb-3">Why This Matters</h3>
-                <p className="text-slate-600">The cost of getting it wrong far exceeds the cost of doing it right.</p>
+               <h3 className="text-2xl font-bold text-primary mb-3">Why Matching Matters</h3>
+               <p className="text-slate-600">The real cost is time, confidence, and momentum lost from the wrong fit.</p>
              </div>
              <div className="grid md:grid-cols-2 gap-8">
                 <div className="flex gap-4">
                    <div className="text-secondary font-bold text-2xl flex-shrink-0">❌</div>
                    <div>
-                      <h4 className="font-bold text-slate-800 mb-2">The Typical Path (Trial & Error)</h4>
+                       <h4 className="font-bold text-slate-800 mb-2">The Typical Path (Trial & Error)</h4>
                       <ul className="text-slate-600 text-sm space-y-1 leading-relaxed">
                          <li>• Try Tutor #1: Wrong teaching style (4 weeks wasted)</li>
                          <li>• Try Tutor #2: No chemistry with student (6 weeks wasted)</li>
                          <li>• Try Tutor #3: Finally works, but 3 months behind</li>
-                         <li>• Total cost: $600+ in switching fees + lost progress</li>
+                         <li>• Momentum drops and confidence suffers</li>
                       </ul>
                    </div>
                 </div>
                 <div className="flex gap-4">
                    <div className="text-green-600 font-bold text-2xl flex-shrink-0">✓</div>
                    <div>
-                      <h4 className="font-bold text-slate-800 mb-2">Our "Right First Time" Guarantee</h4>
+                       <h4 className="font-bold text-slate-800 mb-2">Our Premium Matching Process</h4>
                       <ul className="text-slate-600 text-sm space-y-1 leading-relaxed">
-                         <li>• One diagnostic session (30-90 min)</li>
+                         <li>• Diagnostic session included when you request a tutor</li>
                          <li>• Precision match based on learning profile</li>
-                         <li>• Right tutor from Day 1, or we replace—free</li>
-                         <li>• Total cost: $250-600 matching fee (one-time only)</li>
+                         <li>• Fast replacement if the fit isn’t right</li>
+                         <li>• Transparent, premium service with no hidden fees</li>
                       </ul>
                    </div>
                 </div>
@@ -125,29 +125,29 @@ export const About: React.FC = () => (
        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12">
              <div className="inline-block bg-blue-400/20 border border-blue-400/30 px-4 py-2 rounded-full text-sm font-bold mb-6">
-                Limited Spots • Application Only
+                Premium Matching • By Request
              </div>
-             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Book Your Right Fit Assessment</h2>
+             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Request Your Tutor Match</h2>
              <p className="text-slate-200 text-lg leading-relaxed mb-6">
-               Your complimentary session includes subject diagnostics, learning style analysis, a personalized improvement plan, and guidance on next steps.
+               We run a diagnostic, map the learning profile, and match the right tutor fast—so you skip trial and error.
              </p>
              <p className="text-blue-200 text-sm italic">
-               We accept a limited number of families per month to ensure personalized attention and quality matching.
+               Premium, high-touch matching included with every request.
              </p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-2xl mx-auto">
              <div className="bg-white/10 p-6 rounded-xl border border-white/10 backdrop-blur-sm">
                 <Calendar className="text-blue-400 mb-3" size={32} />
-                <h4 className="font-bold text-white mb-2">When</h4>
-                <p className="text-slate-300 text-sm">Flexible scheduling within 2–4 weeks of your application approval.</p>
+                <h4 className="font-bold text-white mb-2">Timeline</h4>
+                <p className="text-slate-300 text-sm">We typically match within 3–7 days after your request is reviewed.</p>
              </div>
              <div className="bg-white/10 p-6 rounded-xl border border-white/10 backdrop-blur-sm">
                 <Users className="text-blue-400 mb-3" size={32} />
-                <h4 className="font-bold text-white mb-2">Who Qualifies</h4>
+                <h4 className="font-bold text-white mb-2">Who It’s For</h4>
                 <div className="text-slate-300 text-sm space-y-2">
-                  <p>Primary 5 and above. Learning patterns are clearer at this stage, making our diagnostic more valuable.</p>
-                  <p className="text-slate-400 text-xs italic">Younger students or specialized needs (language, enrichment, etc.): reach out—we assess case-by-case.</p>
+                  <p>Primary to JC/IB/IGCSE students who want the right tutor quickly.</p>
+                  <p className="text-slate-400 text-xs italic">We also support enrichment and specialized needs—just tell us what you’re looking for.</p>
                 </div>
              </div>
           </div>
@@ -155,19 +155,19 @@ export const About: React.FC = () => (
           <div className="text-center mb-8">
              <div className="bg-amber-500/20 border border-amber-400/30 rounded-lg px-4 py-2 inline-block mb-6">
                 <p className="text-amber-200 text-sm font-bold">
-                  ✓ Complimentary • No fees, no pressure • Just a serious diagnostic
+                  ✓ Premium matching included • Transparent process • No hidden fees
                 </p>
              </div>
              <div>
-                <Button to="/parents" variant="white" className="px-12 py-4 text-lg font-bold shadow-xl shadow-blue-900/50">
-                   Book Your Right Fit Assessment
-                </Button>
+                 <Button to="/parents" variant="white" className="px-12 py-4 text-lg font-bold shadow-xl shadow-blue-900/50">
+                   Request a Tutor
+                 </Button>
              </div>
           </div>
 
-          <p className="text-center text-slate-400 text-xs mt-6">
-             Applications reviewed within 48 hours. We maintain a selective intake to ensure the best tutor-student matches.
-          </p>
+           <p className="text-center text-slate-400 text-xs mt-6">
+             Requests reviewed within 48 hours. We prioritize quality matches and fast turnaround.
+           </p>
        </div>
     </div>
 

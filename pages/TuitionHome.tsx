@@ -1,12 +1,23 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Section, Button } from '../components/Components';
 import { SERVICES } from '../constants';
-import { Link } from 'react-router-dom';
-import { CheckCircle2, AlertOctagon, BookOpen, GraduationCap, School, ChevronDown, Star, TrendingUp, Users, Award } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { CheckCircle2, AlertOctagon, BookOpen, GraduationCap, School, ChevronDown, Star, TrendingUp, Users, Award, Microscope, Target } from 'lucide-react';
 
 const TuitionHome: React.FC = () => {
   const [openFaqParent, setOpenFaqParent] = useState<number | null>(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('section') === 'about') {
+      const section = document.getElementById('about');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [location.search]);
 
   const parentFaqs = [
     {
@@ -31,7 +42,7 @@ const TuitionHome: React.FC = () => {
     },
     {
       q: "What's included in the Right Fit Assessment?",
-      a: "Our diagnostic assessment is a premium service included at no extra cost for families requesting tutors. We conduct a full evaluation of your child's learning profile, identify knowledge gaps, and match them with the most compatible tutor. We limit intake to ensure quality—this is not a free-for-all service, but a curated process for serious families."
+      a: "Our diagnostic assessment is a premium service included at no extra cost for families requesting tutors. We conduct a full evaluation of your child's learning profile, identify knowledge gaps, and match them with the most compatible tutor quickly. This is a curated, high-touch matching process for families who want the right tutor fast."
     }
   ];
   return (
@@ -67,9 +78,9 @@ const TuitionHome: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <Button to="/parents" className="px-10 py-5 text-lg shadow-2xl shadow-blue-900/50 hover:scale-105 transition-transform">
-              Apply for Assessment
+              Request a Tutor
             </Button>
-            <Button to="/about" variant="white" className="px-10 py-5 text-lg shadow-xl hover:scale-105 transition-transform">
+            <Button to="/tuition?section=about" variant="white" className="px-10 py-5 text-lg shadow-xl hover:scale-105 transition-transform">
               How We're Different
             </Button>
           </div>
@@ -85,8 +96,8 @@ const TuitionHome: React.FC = () => {
               <p className="text-xs text-slate-300 uppercase tracking-wide">Student Community</p>
             </div>
             <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-              <p className="text-2xl font-bold text-blue-200 mb-2">Limited</p>
-              <p className="text-xs text-slate-300 uppercase tracking-wide">Monthly Intake</p>
+              <p className="text-2xl font-bold text-blue-200 mb-2">Premium</p>
+              <p className="text-xs text-slate-300 uppercase tracking-wide">Matching Service</p>
             </div>
             <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
               <p className="text-2xl font-bold text-blue-200 mb-2">Fast</p>
@@ -122,9 +133,9 @@ const TuitionHome: React.FC = () => {
         </div>
 
         <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-8 text-center">
-          <p className="text-lg font-semibold mb-4">Ready to see measurable results?</p>
+          <p className="text-lg font-semibold mb-4">Ready to request your tutor match?</p>
           <Button to="/parents" variant="white" className="text-lg px-8 py-3">
-            Start Your Right Fit Assessment
+            Request a Tutor
           </Button>
         </div>
       </Section>
@@ -153,8 +164,8 @@ const TuitionHome: React.FC = () => {
 
           <div className="text-center">
             <p className="text-slate-300 mb-6">Today, we've helped 250+ families get it right the first time. Our mission: <strong>eliminate tutor-shopping waste.</strong></p>
-            <Button to="/about" variant="white" className="px-8 py-3 text-lg">
-              Learn Our Full Story
+            <Button to="/tuition?section=about" variant="white" className="px-8 py-3 text-lg">
+              How Premium Matching Works
             </Button>
           </div>
         </div>
@@ -178,7 +189,6 @@ const TuitionHome: React.FC = () => {
               <li>• Weak algebra foundations</li>
               <li>• Exam anxiety affecting performance</li>
               <li>• Parents unsure which tutor to try</li>
-              <li>• 2 failed tutors already (3 months, $450)</li>
             </ul>
           </div>
 
@@ -338,14 +348,14 @@ const TuitionHome: React.FC = () => {
                <div className="inline-block bg-white border border-blue-200 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-4 text-secondary">
                  The Integrated Learnings Difference
                </div>
-               <h2 className="text-4xl md:text-5xl font-extrabold text-primary mb-6">Beyond Traditional Tuition</h2>
+               <h2 className="text-4xl md:text-5xl font-extrabold text-primary mb-6">Premium Tutor Matching, Done Right</h2>
                <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                 We don't just assign tutors. We diagnose learning gaps, match by teaching style, and track progress with data—treating education like the serious investment it is.
+                 We don’t just list tutors. We run a premium diagnostic-driven matching service so parents can request the right tutor quickly—then we track progress with clarity.
                </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: "Diagnostic-First Approach", desc: "90-min Right Fit Assessment before matching" },
+                { title: "Premium Diagnostic Matching", desc: "Included when you request a tutor—no extra fees" },
                 { title: "Singapore Education Expertise", desc: "FSBB/SBB, DSA, O-Level, PSLE pathway specialists" },
                 { title: "Character-Vetted Tutors", desc: "80% rejection rate • Only qualified educators with proven track records" },
                 { title: "Real-Time Dashboards", desc: "Parents see lesson schedules, progress reports, and payment history" },
@@ -368,6 +378,71 @@ const TuitionHome: React.FC = () => {
         </div>
       </Section>
 
+      {/* Integrated About Section */}
+      <Section id="about" className="bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">How Premium Matching Works</h2>
+            <p className="text-lg text-slate-600">A diagnostic-first approach that gets you the right tutor without trial and error.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-sm border border-blue-100">
+              <Microscope className="text-secondary mb-4" size={40} />
+              <h3 className="text-lg font-bold text-primary mb-3">1. Diagnose the Real Issue</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                We identify whether the struggle is conceptual gaps, exam anxiety, study habits, or learning style—so the match is precise.
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-sm border border-blue-100">
+              <Target className="text-secondary mb-4" size={40} />
+              <h3 className="text-lg font-bold text-primary mb-3">2. Map the Learning Profile</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                We assess learning preference, motivation level, and tutoring style fit to avoid mismatches from day one.
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-sm border border-blue-100">
+              <Users className="text-secondary mb-4" size={40} />
+              <h3 className="text-lg font-bold text-primary mb-3">3. Match the Right Tutor</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                We select from vetted educators by expertise and personality fit—because the right human connection matters.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-slate-50 border-2 border-secondary/20 rounded-2xl p-8 md:p-12">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-primary mb-3">Why Matching Matters</h3>
+              <p className="text-slate-600">The real cost is time, confidence, and momentum lost from the wrong fit.</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="flex gap-4">
+                <div className="text-secondary font-bold text-2xl flex-shrink-0">❌</div>
+                <div>
+                  <h4 className="font-bold text-slate-800 mb-2">Trial & Error</h4>
+                  <ul className="text-slate-600 text-sm space-y-1 leading-relaxed">
+                    <li>• Weeks lost to mismatched tutors</li>
+                    <li>• Confidence drops and frustration builds</li>
+                    <li>• Progress stalls while switching</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="text-green-600 font-bold text-2xl flex-shrink-0">✓</div>
+                <div>
+                  <h4 className="font-bold text-slate-800 mb-2">Premium Matching</h4>
+                  <ul className="text-slate-600 text-sm space-y-1 leading-relaxed">
+                    <li>• Diagnostic included with tutor request</li>
+                    <li>• Precision match based on learning profile</li>
+                    <li>• Fast replacement if the fit isn’t right</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Final CTA - Premium */}
       <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 py-24 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(white 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
@@ -380,14 +455,14 @@ const TuitionHome: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button to="/parents" variant="white" className="w-full sm:w-auto text-lg px-10 py-5 shadow-2xl hover:scale-105 transition-transform">
-              Book Your Right Fit Assessment →
+              Request a Tutor →
             </Button>
             <Button to="/contact" className="w-full sm:w-auto text-lg px-10 py-5 bg-blue-800 hover:bg-blue-900 border-2 border-white/20 hover:scale-105 transition-transform">
               💬 Chat With Education Consultant
             </Button>
           </div>
           <p className="text-blue-200 text-sm mt-6">
-            📅 Limited intake each month • Application required
+            Premium diagnostic matching included
           </p>
         </div>
       </div>
