@@ -55,8 +55,12 @@ const App: React.FC = () => {
           {/* Authentication Routes */}
           <Route path="/parent-login" element={<ParentLogin />} />
           <Route path="/parent-signup" element={<ParentSignup />} />
+          <Route path="/parents/login" element={<ParentLogin />} />
+          <Route path="/parents/signup" element={<ParentSignup />} />
           <Route path="/tutor-login" element={<TutorLogin />} />
           <Route path="/tutor-signup" element={<TutorSignup />} />
+          <Route path="/tutors/login" element={<TutorLogin />} />
+          <Route path="/tutors/signup" element={<TutorSignup />} />
           
           {/* New Dashboards */}
           <Route path="/parents" element={<ParentDashboard />} />
