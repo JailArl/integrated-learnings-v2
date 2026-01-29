@@ -16,10 +16,14 @@ export const signUpParent = async (
   phone?: string
 ): Promise<{ success: boolean; error?: string; user?: any }> => {
   if (!supabase) {
-    return { success: false, error: 'Supabase not configured' };
+    const msg = 'Supabase not configured';
+    console.error('❌', msg);
+    return { success: false, error: msg };
   }
 
   try {
+    console.log('📝 Starting parent signup with:', { email, fullName, phone });
+    
     // Create auth user
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
@@ -32,8 +36,16 @@ export const signUpParent = async (
       },
     });
 
-    if (authError) throw authError;
-    if (!authData.user) throw new Error('User creation failed');
+    if (authError) {
+      console.error('❌ Auth error:', authError);
+      throw authError;
+    }
+    if (!authData.user) {
+      console.error('❌ No user returned from auth signup');
+      throw new Error('User creation failed');
+    }
+    
+    console.log('✅ Auth user created:', authData.user.id);
 
     // Create parent profile
     const { error: profileError } = await supabase
@@ -47,12 +59,16 @@ export const signUpParent = async (
         },
       ]);
 
-    if (profileError) throw profileError;
-
+    if (profileError) {
+      console.error('❌ Profile insert error:', profileError);
+      throw profileError;
+    }
+    
+    console.log('✅ Parent profile created successfully');
     return { success: true, user: authData.user };
   } catch (error: any) {
-    console.error('Parent signup error:', error);
-    return { success: false, error: error.message };
+    console.error('❌ Parent signup error:', error.message || error);
+    return { success: false, error: error.message || 'Unknown error' };
   }
 };
 
@@ -66,10 +82,14 @@ export const signUpTutor = async (
   }
 ): Promise<{ success: boolean; error?: string; user?: any }> => {
   if (!supabase) {
-    return { success: false, error: 'Supabase not configured' };
+    const msg = 'Supabase not configured';
+    console.error('❌', msg);
+    return { success: false, error: msg };
   }
 
   try {
+    console.log('📝 Starting tutor signup with:', { email, fullName: data.fullName, phone: data.phone });
+    
     // Create auth user
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
@@ -82,8 +102,16 @@ export const signUpTutor = async (
       },
     });
 
-    if (authError) throw authError;
-    if (!authData.user) throw new Error('User creation failed');
+    if (authError) {
+      console.error('❌ Auth error:', authError);
+      throw authError;
+    }
+    if (!authData.user) {
+      console.error('❌ No user returned from auth signup');
+      throw new Error('User creation failed');
+    }
+    
+    console.log('✅ Auth user created:', authData.user.id);
 
     // Create tutor profile with basic info only
     // Detailed info (qualification, subjects, levels, experience, etc.) collected later
@@ -99,12 +127,16 @@ export const signUpTutor = async (
         },
       ]);
 
-    if (profileError) throw profileError;
-
+    if (profileError) {
+      console.error('❌ Profile insert error:', profileError);
+      throw profileError;
+    }
+    
+    console.log('✅ Tutor profile created successfully');
     return { success: true, user: authData.user };
   } catch (error: any) {
-    console.error('Tutor signup error:', error);
-    return { success: false, error: error.message };
+    console.error('❌ Tutor signup error:', error.message || error);
+    return { success: false, error: error.message || 'Unknown error' };
   }
 };
 
