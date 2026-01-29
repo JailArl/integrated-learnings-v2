@@ -7,7 +7,6 @@ import { CheckCircle2, AlertOctagon, BookOpen, GraduationCap, School, ChevronDow
 
 const TuitionHome: React.FC = () => {
   const [openFaqParent, setOpenFaqParent] = useState<number | null>(0);
-  const [openFaqTutor, setOpenFaqTutor] = useState<number | null>(0);
 
   const parentFaqs = [
     {
@@ -16,7 +15,7 @@ const TuitionHome: React.FC = () => {
     },
     {
       q: "What's the typical cost of tuition?",
-      a: "Rates vary by level and subject. Primary students: $35-50/hr, Secondary: $45-65/hr, JC: $60-80/hr. One-to-One at your home is standard. We don't charge upfront—you pay only for completed lessons."
+      a: "Rates vary by level and subject. Primary students: $40-55/hr, Secondary: $50-75/hr, JC: $65-90/hr. One-to-One at your home is standard. We don't charge upfront—you pay only for completed lessons. Premium pricing reflects our diagnostic-driven matching service."
     },
     {
       q: "What if I'm not satisfied with my tutor?",
@@ -29,29 +28,10 @@ const TuitionHome: React.FC = () => {
     {
       q: "Do you offer trial lessons?",
       a: "Not formally, but many tutors offer a 30-min intro call before the first paid lesson. This is perfect for compatibility and learning style assessment."
-    }
-  ];
-
-  const tutorFaqs = [
-    {
-      q: "How much can I earn as a tutor?",
-      a: "Set your own rates (Primary $35-50/hr, Secondary $50-70/hr, JC $70-90/hr). We charge parents a one-time 50% referral fee for Month 1. From Month 2 onwards, you collect payment directly from parents. No ongoing commissions."
     },
     {
-      q: "What's the application and verification process?",
-      a: "1. Create account → 2. Upload certificates (degree, teaching qualifications) → 3. Verification (24-48 hrs) → 4. Browse job board. We're selective (~80% rejection rate) to ensure quality."
-    },
-    {
-      q: "Can I work flexible hours?",
-      a: "Absolutely. You choose which jobs to apply for and negotiate hours with parents. Many tutors juggle this with full-time jobs or studies."
-    },
-    {
-      q: "How many students can I teach?",
-      a: "No limits. Some tutors teach 2-3 regular students and take ad-hoc jobs. Others focus on 1-2 long-term relationships. You're in control."
-    },
-    {
-      q: "What support do you provide?",
-      a: "Access to our tutor network, ongoing training resources, lesson planning guides, and direct support for any parent disputes. We've got your back."
+      q: "What's included in the Right Fit Assessment?",
+      a: "Our diagnostic assessment is a premium service included at no extra cost for families requesting tutors. We conduct a full evaluation of your child's learning profile, identify knowledge gaps, and match them with the most compatible tutor. We limit intake to ensure quality—this is not a free-for-all service, but a curated process for serious families."
     }
   ];
   return (
@@ -415,65 +395,33 @@ const TuitionHome: React.FC = () => {
       <Section className="bg-slate-50">
         <h2 className="text-3xl font-bold text-primary text-center mb-12">Frequently Asked Questions</h2>
         
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Parent FAQs */}
-          <div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
-              👨‍👩‍👧 For Parents
-            </h3>
-            <div className="space-y-3">
-              {parentFaqs.map((faq, idx) => (
-                <div key={idx} className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaqParent(openFaqParent === idx ? null : idx)}
-                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-slate-50 transition font-bold text-slate-800 text-left"
-                  >
-                    {faq.q}
-                    <ChevronDown size={18} className={`transition ${openFaqParent === idx ? 'rotate-180' : ''}`} />
-                  </button>
-                  {openFaqParent === idx && (
-                    <div className="px-4 py-3 bg-slate-50 border-t border-slate-200 text-slate-700 text-sm leading-relaxed">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <Button to="/parents" className="w-full mt-6">Start Your Application →</Button>
+        <div className="max-w-3xl mx-auto">
+          {/* Parent FAQs Only */}
+          <h3 className="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+            👨‍👩‍👧 Frequently Asked Questions
+          </h3>
+          <div className="space-y-3">
+            {parentFaqs.map((faq, idx) => (
+              <div key={idx} className="bg-white rounded-lg border border-slate-200 overflow-hidden">
+                <button
+                  onClick={() => setOpenFaqParent(openFaqParent === idx ? null : idx)}
+                  className="w-full px-4 py-3 flex items-center justify-between hover:bg-slate-50 transition font-bold text-slate-800 text-left"
+                >
+                  {faq.q}
+                  <ChevronDown size={18} className={`transition ${openFaqParent === idx ? 'rotate-180' : ''}`} />
+                </button>
+                {openFaqParent === idx && (
+                  <div className="px-4 py-3 bg-slate-50 border-t border-slate-200 text-slate-700 text-sm leading-relaxed">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-
-          {/* Tutor FAQs */}
-          <div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center">
-              🎓 For Tutors
-            </h3>
-            <div className="space-y-3">
-              {tutorFaqs.map((faq, idx) => (
-                <div key={idx} className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaqTutor(openFaqTutor === idx ? null : idx)}
-                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-slate-50 transition font-bold text-slate-800 text-left"
-                  >
-                    {faq.q}
-                    <ChevronDown size={18} className={`transition ${openFaqTutor === idx ? 'rotate-180' : ''}`} />
-                  </button>
-                  {openFaqTutor === idx && (
-                    <div className="px-4 py-3 bg-slate-50 border-t border-slate-200 text-slate-700 text-sm leading-relaxed">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <Button to="/teach" className="w-full mt-6 bg-green-600 hover:bg-green-700">Apply as Tutor →</Button>
-          </div>
+          <Button to="/parents" className="w-full mt-8">Start Your Application →</Button>
         </div>
       </Section>
-      {/* Subtle Link for Educators at bottom */}
-      <div className="bg-slate-50 py-12 text-center border-t border-slate-100">
-         <p className="text-slate-500 text-sm mb-4">Are you a qualified educator looking for students?</p>
-         <Link to="/teach" className="text-secondary font-bold hover:underline text-sm">Apply to join our Tutor Network &rarr;</Link>
-      </div>
+
     </>
   );
 };
